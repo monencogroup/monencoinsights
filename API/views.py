@@ -430,16 +430,14 @@ class PurchaseListView(ListAPIView):
 
 
 class BazarTokenView(APIView):
+    permission_classes = [AllowAny]
 
     def get(self, request):
         configs = Configs.objects.all().first()
-        configs.cafeBazarCode = request.query_params('code')
-        configs.save()
-        return Response(status=status.HTTP_200_OK)
-
-    def post(self, request):
-        configs = Configs.objects.all().first()
-        configs.cafeBazarCode = request.data('code')
+        code = request.query_params.get('code', None)
+        if code is None:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        configs.cafeBazarCode = code
         configs.save()
         return Response(status=status.HTTP_200_OK)
 
