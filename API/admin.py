@@ -42,7 +42,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Article, ArticleAdmin)
-
+admin.site.register(BazarToken)
 
 class ArticlePartAdmin(admin.ModelAdmin):
     def article(self, obj):
