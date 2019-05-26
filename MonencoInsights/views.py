@@ -14,9 +14,15 @@ class VersionCheckView(APIView):
             version = request.query_params['version']
         except KeyError:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        if str(version) != "1":
+        if str(version) != "1" and str(version) != "2":
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        else:
+        if str(version) == "1":
+            data = dict()
+            data['isSupported'] = True
+            data['newVersionAvailable'] = False
+            data['newVersionLink'] = None
+            return Response(data=data, status=status.HTTP_200_OK)
+        if str(version) == "2":
             data = dict()
             data['isSupported'] = True
             data['newVersionAvailable'] = False
