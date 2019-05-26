@@ -80,11 +80,16 @@ class ConfigsSerializer(ModelSerializer):
         return CategorySerializer(categories, many=True, context=self.context).data
 
     def get_bannerArticles(self, obj):
-        articles = Article.objects.filter(isBanner=True, isPersian=self.context['isPersian']).order_by('-creationDate')
+        client = self.context.get('request').user.client
+        articles = Article.objects.filter(isBanner=True, isPersian=self.context['isPersian'], published=True,
+                                          category__in=client.favoriteCategories.all()).distinct().order_by(
+            '-creationDate')
         return ArticleCompactSerializer(articles, many=True, context=self.context).data
 
     def get_newArticles(self, obj):
-        articles = Article.objects.filter(isPersian=self.context['isPersian']).order_by('-creationDate')[:10]
+        client = self.context.get('request').user.client
+        articles = Article.objects.filter(isPersian=self.context['isPersian'], published=True,
+                                          category__in=client.favoriteCategories.all()).order_by('-creationDate')[:10]
         return ArticleCompactSerializer(articles, many=True, context=self.context).data
 
     def get_shareFooter(self, obj):
