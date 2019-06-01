@@ -18,9 +18,9 @@ class VersionCheckView(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
         if str(version) == "1":
             data = dict()
-            data['isSupported'] = False
-            data['newVersionAvailable'] = True
-            data['newVersionLink'] = "https://cafebazaar.ir/app/com.monenco.insights/"
+            data['isSupported'] = True
+            data['newVersionAvailable'] = False
+            data['newVersionLink'] = None
             return Response(data=data, status=status.HTTP_200_OK)
         if str(version) == "2":
             data = dict()
