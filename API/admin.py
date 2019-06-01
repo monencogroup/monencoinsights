@@ -38,11 +38,18 @@ class ArticleAdmin(admin.ModelAdmin):
         else:
             return "EN"
 
-    list_display = ("Title", "Author", "Price", "Status", "Category", "Lang")
+    def PaymentId(self, obj):
+        if obj.price == 0:
+            return "-----"
+        else:
+            return "Article" + str(obj.id)
+
+    list_display = ("Title", "Author", "Price", "Status", "Category", "Lang", "PaymentId")
 
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(BazarToken)
+
 
 class ArticlePartAdmin(admin.ModelAdmin):
     def article(self, obj):

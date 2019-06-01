@@ -203,6 +203,7 @@ class ArticleSerializer(ModelSerializer):
     purchasable = SerializerMethodField()
     purchased = SerializerMethodField()
     price = SerializerMethodField()
+    cafeBazarPaymentId = SerializerMethodField()
 
     class Meta:
         model = Article
@@ -269,6 +270,9 @@ class ArticleSerializer(ModelSerializer):
 
     def get_price(self, obj):
         return obj.price
+
+    def get_cafeBazarPaymentId(self, obj):
+        return "Article" + str(obj.id)
 
 
 class ArticlePartSerializer(ModelSerializer):

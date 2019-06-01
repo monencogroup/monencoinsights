@@ -74,7 +74,6 @@ class Article(Model):
     isBanner = BooleanField(default=False)
     price = IntegerField(default=0)
     published = BooleanField(default=False)
-    cafeBazarPaymentId = CharField(max_length=100, null=True, blank=False, default=None,unique=True)
 
     def __str__(self):
         return self.title

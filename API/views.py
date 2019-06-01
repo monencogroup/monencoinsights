@@ -458,10 +458,12 @@ class PaymentCheck(APIView):
             dataDictionary = serializer.validated_data
             paymentId = dataDictionary['paymentId']
             paymentToken = dataDictionary['paymentToken']
-
-            if Article.objects.filter(cafeBazarPaymentId=paymentId).exists() is False:
+            if paymentId.startswith("Article") is False:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
-            article = Article.objects.get(cafeBazarPaymentId=paymentId)
+            articleId = paymentId[7:]
+            if Article.objects.filter(id=articleId).exists() is False:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+            article = Article.objects.get(id=articleId)
 
             url = "https://pardakht.cafebazaar.ir/devapi/v2/api/validate/com.monenco.insights/inapp/" + paymentId \
                   + "/purchases/" + paymentToken
