@@ -17,6 +17,7 @@ from API.views import (
     PaymentCheck,
 )
 
+app_name = 'API'
 urlpatterns = [
     url(r'^authentication/register/', RegisterView.as_view()),
     url(r'^authentication/login/', LoginView.as_view()),
@@ -33,7 +34,7 @@ urlpatterns = [
     url(r'^article/purchase/callback/', PurchaseCallbackView.as_view()),
     url(r'^article/purchase/list/', PurchaseListView.as_view()),
     url(r'^article/purchase/', ArticlePurchaseView.as_view()),
-    url(r'^article/payment/check/',PaymentCheck.as_view()),
+    url(r'^article/payment/check/', PaymentCheck.as_view()),
     url(r'^article/', ArticleView.as_view()),
     url(r'^bazar/token/', BazarTokenView.as_view()),
 ]

@@ -104,12 +104,12 @@ class Configs(Model):
     persianShareFooter = TextField(default=None, blank=True, null=True)
     aboutUs = RichTextField(null=True, blank=True, default=None)
     persianAboutUs = RichTextField(null=True, blank=True, default=None)
-    cafeBazarCode = CharField(max_length=255,null=True,blank=True)
+    cafeBazarCode = CharField(max_length=255, null=True, blank=True)
 
 
 class PurchaseBankID(Model):
-    client = ForeignKey(to="Client", db_index=True)
-    article = ForeignKey(to="Article", db_index=True)
+    client = ForeignKey(to="Client", db_index=True, on_delete=CASCADE)
+    article = ForeignKey(to="Article", db_index=True, on_delete=CASCADE)
     authorityID = CharField(max_length=200, null=False, blank=False)
     platform = CharField(max_length=100, null=False, blank=False)
 

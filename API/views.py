@@ -2,7 +2,6 @@ import requests
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.http import HttpResponse
-from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope
 from rest_framework import status
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import (
@@ -114,7 +113,7 @@ class RefreshTokenView(APIView):
 
 # Fully OK
 class LogoutView(APIView):
-    permission_classes = [IsAuthenticated, TokenHasReadWriteScope]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         try:
