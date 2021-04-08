@@ -2,7 +2,7 @@
 psycopg2==2.8.3
 # for testing auto deploy comment.
 
-Django==2.2.1
+Django==2.2.20
 
 django-hosts==3.0
 # It is for WishWork.hosts file. (Needs settings configurations)
